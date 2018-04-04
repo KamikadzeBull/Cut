@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.*;
@@ -103,7 +104,11 @@ public class CutLauncher {
             throw new Exception("Wrong format of range");
         }
 
-        Cut cut = new Cut(charIndentation, outputFilePath, inputFilePath, range);
-        cut.toCut();
+        try {
+            new Cut(charIndentation, outputFilePath, inputFilePath, range).toCut();
+        }
+        catch (FileNotFoundException e) {
+            throw new Exception("Input file does not exist");
+        }
     }
 }
