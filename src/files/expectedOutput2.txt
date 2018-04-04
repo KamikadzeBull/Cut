@@ -1,0 +1,8 @@
+text lines tool. Complete a
+function on the input data.
+the lines random
+be useful for progr
+For example, you could
+shuffle the lines of a text file ran
+new file. The file co
+several thousands of lines. See the

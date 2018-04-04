@@ -1,0 +1,10 @@
+About     Shuffle text lines 
+ shuffle       lines function on 
+This makes the lines 
+and        can be useful 
+amming applications. For example, 
+want to shuffle the 
+domly and
+ creat a new file. 
+uld have several thousands 
+example.
