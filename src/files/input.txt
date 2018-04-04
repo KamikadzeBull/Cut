@@ -1,7 +1,7 @@
-About Shuffle text lines tool. Complete a
- shuffle lines function on the input data.
+About     Shuffle text lines tool. Complete a
+ shuffle       lines function on the input data.
 This makes the lines random
-and can be useful for progr
+and        can be useful for progr
 amming applications. For example, you could
 want to shuffle the lines of a text file ran
 domly and
