@@ -141,10 +141,10 @@ public class Cut{
                     }
                 }
             }
-
-            scanner.close();
-            if (outputFilePath != null)
-                printWriter.close();
         }
+
+        scanner.close();
+        if (outputFilePath != null)
+            printWriter.close();
     }
 }
