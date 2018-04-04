@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Cut{
@@ -17,7 +19,7 @@ public class Cut{
         this.range = range;
     }
 
-    public void toCut() throws FileNotFoundException {
+    public void toCut() throws Exception {
 
         File inputFile = new File(inputFilePath);
         Scanner scanner = new Scanner(inputFile);
@@ -31,8 +33,8 @@ public class Cut{
         }
 
 
-        if (charIndentation){
-            if (range[0] == -1){
+        if (charIndentation) {
+            if (range[0] == -1) {
                 while (scanner.hasNextLine()) {
                     int end = range[1];
                     line = scanner.nextLine();
@@ -46,15 +48,14 @@ public class Cut{
                             System.out.println(substring);
                     }
                 }
-            }
-            else {
-                if (range[1] == -1){
+            } else {
+                if (range[1] == -1) {
                     while (scanner.hasNextLine()) {
                         int begin = range[0];
                         line = scanner.nextLine();
                         if (begin >= line.length())
                             continue;
-                        substring = line.substring(begin, line.length());
+                        substring = line.substring(begin);
                         if (!substring.isEmpty()) {
                             if (outputFilePath != null)
                                 printWriter.println(substring);
@@ -62,8 +63,7 @@ public class Cut{
                                 System.out.println(substring);
                         }
                     }
-                }
-                else {
+                } else {
                     while (scanner.hasNextLine()) {
                         int begin = range[0];
                         int end = range[1];
@@ -82,15 +82,69 @@ public class Cut{
                     }
                 }
             }
-        }
-        /* else {
+        } else {
             while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                String[] words = line.split("\\s+");
+                List<Integer> indexOfWords = new ArrayList<>();
+                int fromIndex = 0;
+                for (String word: words) {
+                    if (word.isEmpty())
+                        continue;
+                    indexOfWords.add(line.indexOf(word, fromIndex));
+                    fromIndex = line.indexOf(word, fromIndex) + word.length();
+                }
 
+                int begin;
+                int end;
+                if (range[0] == -1) {
+                    if (range[1] >= indexOfWords.size())
+                        end = line.length();
+                    else
+                        end = indexOfWords.get(range[1]);
+                    substring = line.substring(0, end);
+                    if (!substring.isEmpty()) {
+                        if (outputFilePath != null)
+                            printWriter.println(substring);
+                        else
+                            System.out.println(substring);
+                    }
+                } else {
+                    if (range[1] == -1) {
+                        if (range[0] >= indexOfWords.size())
+                            continue;
+                        else
+                            begin = indexOfWords.get(range[0]);
+                        substring = line.substring(begin);
+                        if (!substring.isEmpty()) {
+                            if (outputFilePath != null)
+                                printWriter.println(substring);
+                            else
+                                System.out.println(substring);
+                        }
+                    } else {
+                        if (range[0] >= indexOfWords.size())
+                            continue;
+                        else
+                            begin = indexOfWords.get(range[0]);
+                        if (range[1] >= indexOfWords.size())
+                            end = line.length();
+                        else
+                            end = indexOfWords.get(range[1]);
+                        substring = line.substring(begin, end);
+                        if (!substring.isEmpty()) {
+                            if (outputFilePath != null)
+                                printWriter.println(substring);
+                            else
+                                System.out.println(substring);
+                        }
+                    }
+                }
             }
-        } */
-        scanner.close();
-        if (outputFilePath != null)
-            printWriter.close();
-    }
 
+            scanner.close();
+            if (outputFilePath != null)
+                printWriter.close();
+        }
+    }
 }
