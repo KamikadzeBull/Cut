@@ -5,21 +5,8 @@ import java.util.Scanner;
 
 public class Cut{
 
-    private boolean charIndentation;
-    private String outputFilePath;
-    private String inputFilePath;
-    private int[] range;
-
-    public Cut(boolean charIndentation, String outputFilePath,
-               String inputFilePath, int[] range) {
-
-        this.charIndentation = charIndentation;
-        this.outputFilePath = outputFilePath;
-        this.inputFilePath = inputFilePath;
-        this.range = range;
-    }
-
-    public void toCut() throws Exception {
+    public static void toCut(boolean charIndentation, String outputFilePath,
+                             String inputFilePath, int[] range) throws IOException {
 
         File inputFile = new File(inputFilePath);
         Scanner scanner = new Scanner(inputFile);
@@ -27,7 +14,7 @@ public class Cut{
         PrintWriter printWriter = null;
         String line;
         String substring;
-        if (outputFilePath != null) {
+        if (!outputFilePath.isEmpty()) {
             outputFile = new File(outputFilePath);
             printWriter = new PrintWriter(outputFile);
         }
@@ -42,7 +29,7 @@ public class Cut{
                         end = line.length();
                     substring = line.substring(0, end);
                     if (!substring.isEmpty()) {
-                        if (outputFilePath != null)
+                        if (!outputFilePath.isEmpty())
                             printWriter.println(substring);
                         else
                             System.out.println(substring);
@@ -57,7 +44,7 @@ public class Cut{
                             continue;
                         substring = line.substring(begin);
                         if (!substring.isEmpty()) {
-                            if (outputFilePath != null)
+                            if (!outputFilePath.isEmpty())
                                 printWriter.println(substring);
                             else
                                 System.out.println(substring);
@@ -74,7 +61,7 @@ public class Cut{
                             end = line.length() - 1;
                         substring = line.substring(begin, end);
                         if (!substring.isEmpty()) {
-                            if (outputFilePath != null)
+                            if (!outputFilePath.isEmpty())
                                 printWriter.println(substring);
                             else
                                 System.out.println(substring);
@@ -104,7 +91,7 @@ public class Cut{
                         end = indexOfWords.get(range[1]);
                     substring = line.substring(0, end);
                     if (!substring.isEmpty()) {
-                        if (outputFilePath != null)
+                        if (!outputFilePath.isEmpty())
                             printWriter.println(substring);
                         else
                             System.out.println(substring);
@@ -117,7 +104,7 @@ public class Cut{
                             begin = indexOfWords.get(range[0]);
                         substring = line.substring(begin);
                         if (!substring.isEmpty()) {
-                            if (outputFilePath != null)
+                            if (!outputFilePath.isEmpty())
                                 printWriter.println(substring);
                             else
                                 System.out.println(substring);
@@ -133,7 +120,7 @@ public class Cut{
                             end = indexOfWords.get(range[1]);
                         substring = line.substring(begin, end);
                         if (!substring.isEmpty()) {
-                            if (outputFilePath != null)
+                            if (!outputFilePath.isEmpty())
                                 printWriter.println(substring);
                             else
                                 System.out.println(substring);
@@ -144,7 +131,7 @@ public class Cut{
         }
 
         scanner.close();
-        if (outputFilePath != null)
+        if (!outputFilePath.isEmpty())
             printWriter.close();
     }
 }
