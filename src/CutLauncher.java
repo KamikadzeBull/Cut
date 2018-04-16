@@ -3,19 +3,19 @@ import java.util.regex.*;
 
 public class CutLauncher {
 
-    @Option(name = "-c", usage = "char indentation")
+    @Option(name = "-c", usage = "char indentation", forbids = "-w")
     private boolean charIndentation;
 
-    @Option(name = "-w", usage = "word indentation")
+    @Option(name = "-w", usage = "word indentation", forbids = "-c")
     private boolean wordIndentation;
 
     @Option(name = "-o", usage = "output file path")
     private String outputFilePath = "";
 
-    @Argument (usage = "input file path")
+    @Argument (usage = "input file path", index = 0)
     private String inputFilePath = "";
 
-    @Argument (usage = "indentation range")
+    @Argument (usage = "indentation range", index = 1)
     private String range = "";
 
 
