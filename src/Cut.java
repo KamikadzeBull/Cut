@@ -11,14 +11,15 @@ public class Cut{
         File inputFile = new File(inputFilePath);
         Scanner scanner = new Scanner(inputFile);
         File outputFile;
-        PrintWriter printWriter = null;
+        PrintWriter printWriter;
         String line;
         String substring;
         if (!outputFilePath.isEmpty()) {
             outputFile = new File(outputFilePath);
             printWriter = new PrintWriter(outputFile);
         }
-
+        else
+            printWriter = new PrintWriter(System.out);
 
         if (charIndentation) {
             if (range[0] == -1) {
@@ -28,12 +29,8 @@ public class Cut{
                     if (end >= line.length())
                         end = line.length();
                     substring = line.substring(0, end);
-                    if (!substring.isEmpty()) {
-                        if (!outputFilePath.isEmpty())
-                            printWriter.println(substring);
-                        else
-                            System.out.println(substring);
-                    }
+                    if (!substring.isEmpty())
+                        printWriter.println(substring);
                 }
             } else {
                 if (range[1] == -1) {
@@ -43,12 +40,8 @@ public class Cut{
                         if (begin >= line.length())
                             continue;
                         substring = line.substring(begin);
-                        if (!substring.isEmpty()) {
-                            if (!outputFilePath.isEmpty())
-                                printWriter.println(substring);
-                            else
-                                System.out.println(substring);
-                        }
+                        if (!substring.isEmpty())
+                            printWriter.println(substring);
                     }
                 } else {
                     while (scanner.hasNextLine()) {
@@ -60,12 +53,8 @@ public class Cut{
                         if (end >= line.length())
                             end = line.length() - 1;
                         substring = line.substring(begin, end);
-                        if (!substring.isEmpty()) {
-                            if (!outputFilePath.isEmpty())
-                                printWriter.println(substring);
-                            else
-                                System.out.println(substring);
-                        }
+                        if (!substring.isEmpty())
+                            printWriter.println(substring);
                     }
                 }
             }
@@ -90,12 +79,8 @@ public class Cut{
                     else
                         end = indexOfWords.get(range[1]);
                     substring = line.substring(0, end);
-                    if (!substring.isEmpty()) {
-                        if (!outputFilePath.isEmpty())
-                            printWriter.println(substring);
-                        else
-                            System.out.println(substring);
-                    }
+                    if (!substring.isEmpty())
+                        printWriter.println(substring);
                 } else {
                     if (range[1] == -1) {
                         if (range[0] >= indexOfWords.size())
@@ -103,12 +88,8 @@ public class Cut{
                         else
                             begin = indexOfWords.get(range[0]);
                         substring = line.substring(begin);
-                        if (!substring.isEmpty()) {
-                            if (!outputFilePath.isEmpty())
-                                printWriter.println(substring);
-                            else
-                                System.out.println(substring);
-                        }
+                        if (!substring.isEmpty())
+                            printWriter.println(substring);
                     } else {
                         if (range[0] >= indexOfWords.size())
                             continue;
@@ -119,19 +100,14 @@ public class Cut{
                         else
                             end = indexOfWords.get(range[1]);
                         substring = line.substring(begin, end);
-                        if (!substring.isEmpty()) {
-                            if (!outputFilePath.isEmpty())
-                                printWriter.println(substring);
-                            else
-                                System.out.println(substring);
-                        }
+                        if (!substring.isEmpty())
+                            printWriter.println(substring);
                     }
                 }
             }
         }
 
         scanner.close();
-        if (!outputFilePath.isEmpty())
-            printWriter.close();
+        printWriter.close();
     }
 }
